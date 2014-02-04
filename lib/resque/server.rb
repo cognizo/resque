@@ -173,11 +173,6 @@ module Resque
       end
     end
 
-    post "/queues/:id/remove" do
-      Resque.remove_queue(params[:id])
-      redirect u('queues')
-    end
-
     get "/failed/?" do
       if Resque::Failure.url
         redirect Resque::Failure.url
@@ -192,42 +187,6 @@ module Resque
       else
         show :failed
       end
-    end
-
-    post "/failed/clear" do
-      Resque::Failure.clear
-      redirect u('failed')
-    end
-
-    post "/failed/:queue/clear" do
-      Resque::Failure.clear params[:queue]
-      redirect u('failed')
-    end
-
-    post "/failed/requeue/all" do
-      Resque::Failure.count.times do |num|
-        Resque::Failure.requeue(num)
-      end
-      redirect u('failed')
-    end
-
-    post "/failed/:queue/requeue/all" do
-      Resque::Failure.requeue_queue Resque::Failure.job_queue_name(params[:queue])
-      redirect url_path("/failed/#{params[:queue]}")
-    end
-
-    get "/failed/requeue/:index/?" do
-      Resque::Failure.requeue(params[:index])
-      if request.xhr?
-        return Resque::Failure.all(params[:index])['retried_at']
-      else
-        redirect u('failed')
-      end
-    end
-
-    get "/failed/remove/:index/?" do
-      Resque::Failure.remove(params[:index])
-      redirect u('failed')
     end
 
     get "/stats/?" do

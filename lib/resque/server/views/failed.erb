@@ -5,12 +5,7 @@
 <% end %>
 
 <% unless failed_size.zero? %>
-<form method="POST" action="<%= u "failed#{'/' + params[:queue] if params[:queue]}/clear" %>">
-  <input type="submit" name="" value="Clear <%= params[:queue] ? "'#{params[:queue]}'" : 'Failed' %> Jobs" />
-</form>
-<form method="POST" action="<%= u "failed#{'/' + params[:queue] if params[:queue]}/requeue/all" %>">
-  <input type="submit" name="" value="Retry <%= params[:queue] ? "'#{params[:queue]}'" : 'Failed' %> Jobs" />
-</form>
+    Don't use the UI to clear/retry failed jobs. Use the script!
 <% end %>
 
 <% if failed_multiple_queues? && !params[:queue] %>
