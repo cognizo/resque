@@ -21,7 +21,7 @@
     <dd>
       <% if job['payload'] && job['payload']['class'] %>
         <a href="<%= u "failed/#{params[:queue]}?class=#{job['payload']['class']}" %>">
-          <code><%= job['payload']['class'] %></code>
+          <code><%= trim_job_name job['payload']['class'] %></code>
         </a>
       <% else %>
         <code>nil</code>

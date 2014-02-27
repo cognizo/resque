@@ -19,7 +19,7 @@
         <td><a class="queue" href="<%=u "/queues/#{queue}" %>"><%= queue %></a></td>
         <td><span class="time"><%= data['run_at'] %></span></td>
         <td>
-          <code><%= data['payload']['class'] %></code>
+          <code><%= trim_job_name data['payload']['class'] %></code>
         </td>
         <td><%=h data['payload']['args'].inspect %></td>
       </tr>
@@ -59,7 +59,7 @@
         </td>
         <td class='process'>
           <% if job['queue'] %>
-            <code><%= job['payload']['class'] %></code>
+            <code><%= trim_job_name job['payload']['class'] %></code>
             <small><a class="queue time" href="<%=u "/working/#{worker}" %>"><%= job['run_at'] %></a></small>
           <% else %>
             <span class='waiting'>Waiting for a job...</span>

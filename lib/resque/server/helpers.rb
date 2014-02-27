@@ -49,4 +49,8 @@ Resque::Server.helpers do
     end
     classes
   end
+
+  def trim_job_name(job_name)
+      job_name.sub %q{CATS\Queue\Job\\}, ""
+  end
 end
