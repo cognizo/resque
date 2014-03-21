@@ -53,4 +53,10 @@ Resque::Server.helpers do
   def trim_job_name(job_name)
       job_name.sub %q{CATS\Queue\Job\\}, ""
   end
+
+  def show_progress(job)
+    id = job['payload']['id'];
+    percent = Resque.redis.get('job:' + id + ':progress')
+    percent ? percent + '%' : ''
+  end
 end
