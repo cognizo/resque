@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gemspec
 
 group :test do
-  gem "rake"
+  gem "rake", "10.1.1"
   gem "rack-test", "~> 0.5"
   gem "mocha", :require => false
   gem "airbrake"
