@@ -58,6 +58,7 @@ Resque::Server.helpers do
     id = job['payload']['id'];
     if id.nil?
         return ''
+    end
 
     percent = Resque.redis.get('job:' + id + ':progress')
     percent ? percent + '%' : ''
