@@ -18,7 +18,7 @@ Resque::Server.helpers do
 
   def failed_per_page
     @failed_per_page = if params[:class]
-      failed_size  
+      failed_size
     else
       20
     end
@@ -56,6 +56,9 @@ Resque::Server.helpers do
 
   def show_progress(job)
     id = job['payload']['id'];
+    if id.nil?
+        return ''
+
     percent = Resque.redis.get('job:' + id + ':progress')
     percent ? percent + '%' : ''
   end
